@@ -1,0 +1,193 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "bin/hello"
+		}
+	],
+	"backtrace" : 3,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_executable",
+			"add_exe",
+			"add_all_targets",
+			"install",
+			"install_target",
+			"add_compile_options",
+			"set_default_release_options",
+			"include",
+			"add_compile_definitions"
+		],
+		"files" : 
+		[
+			"cmake/add_exe.cmake",
+			"cmake/add_all_targets.cmake",
+			"CMakeLists.txt",
+			"cmake/install_target.cmake",
+			"cmake/set_default_release_options.cmake",
+			"cmake/buildsystem.cmake"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 2
+			},
+			{
+				"command" : 2,
+				"file" : 2,
+				"line" : 15,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 25,
+				"parent" : 1
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 10,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 2,
+				"line" : 22,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 3,
+				"line" : 10,
+				"parent" : 4
+			},
+			{
+				"command" : 7,
+				"file" : 2,
+				"line" : 11,
+				"parent" : 0
+			},
+			{
+				"file" : 5,
+				"parent" : 6
+			},
+			{
+				"command" : 6,
+				"file" : 5,
+				"line" : 30,
+				"parent" : 7
+			},
+			{
+				"command" : 5,
+				"file" : 4,
+				"line" : 9,
+				"parent" : 8
+			},
+			{
+				"command" : 8,
+				"file" : 4,
+				"line" : 10,
+				"parent" : 8
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-g  "
+				},
+				{
+					"backtrace" : 9,
+					"fragment" : "-std=c17"
+				},
+				{
+					"backtrace" : 9,
+					"fragment" : "-Wall"
+				},
+				{
+					"backtrace" : 9,
+					"fragment" : "-Wextra"
+				},
+				{
+					"backtrace" : 9,
+					"fragment" : "-pedantic"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 10,
+					"define" : "NDEBUG"
+				}
+			],
+			"language" : "C",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"id" : "hello::@6890427a1f51a3e7e1df",
+	"install" : 
+	{
+		"destinations" : 
+		[
+			{
+				"backtrace" : 5,
+				"path" : "/bink"
+			}
+		],
+		"prefix" : 
+		{
+			"path" : "/usr/local"
+		}
+	},
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "-g",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "",
+				"role" : "flags"
+			}
+		],
+		"language" : "C"
+	},
+	"name" : "hello",
+	"nameOnDisk" : "hello",
+	"paths" : 
+	{
+		"build" : ".",
+		"source" : "."
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "hello.c",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "EXECUTABLE"
+}
