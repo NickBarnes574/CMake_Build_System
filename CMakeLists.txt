@@ -19,7 +19,7 @@ add_all_targets(
 add_all_tests()
 
 # Install hello to /bin
-install_target(hello "/bink")
+install_target(hello "/bin")
 
 # Strip hello in release builds
 strip_target(hello)
