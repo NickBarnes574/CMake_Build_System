@@ -1,7 +1,0 @@
-[
-{
-  "directory": "/home/nick/Programming/CMake_Build_System/build",
-  "command": "/usr/bin/clang-12 -DNDEBUG  -g   -std=c17 -Wall -Wextra -pedantic -o CMakeFiles/hello.dir/hello.c.o   -c /home/nick/Programming/CMake_Build_System/hello.c",
-  "file": "/home/nick/Programming/CMake_Build_System/hello.c"
-}
-]
