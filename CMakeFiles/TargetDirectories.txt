@@ -1,7 +1,0 @@
-/home/nick/Programming/CMake_Build_System/CMakeFiles/install/strip.dir
-/home/nick/Programming/CMake_Build_System/CMakeFiles/install/local.dir
-/home/nick/Programming/CMake_Build_System/CMakeFiles/install.dir
-/home/nick/Programming/CMake_Build_System/CMakeFiles/list_install_components.dir
-/home/nick/Programming/CMake_Build_System/CMakeFiles/rebuild_cache.dir
-/home/nick/Programming/CMake_Build_System/CMakeFiles/edit_cache.dir
-/home/nick/Programming/CMake_Build_System/CMakeFiles/hello.dir
