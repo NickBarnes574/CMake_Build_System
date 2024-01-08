@@ -5,14 +5,14 @@
 # -----------------------------------------------------------------------------
 
 
-include(cmake/cmake-checks.cmake)
-include(cmake/tidy-checks.cmake)
-include(cmake/add_all_targets.cmake)
-include(cmake/add_all_tests.cmake)
-include(cmake/set_default_debug_options.cmake)
-include(cmake/set_default_release_options.cmake)
-include(cmake/install_target.cmake)
-include(cmake/strip_target.cmake)
+include(cmake/checks/cmake-checks.cmake)
+include(cmake/checks/tidy-checks.cmake)
+include(cmake/target/add_all_targets.cmake)
+include(cmake/testing/add_all_tests.cmake)
+include(cmake/options/set_default_debug_options.cmake)
+include(cmake/options/set_default_release_options.cmake)
+include(cmake/install/install_target.cmake)
+include(cmake/install/strip_target.cmake)
 
 # Check the build type and configure settings accordingly.
 if(CMAKE_BUILD_TYPE MATCHES debug)

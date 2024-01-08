@@ -5,8 +5,8 @@
 # based on the specified target type.
 # -----------------------------------------------------------------------------
 
-include(cmake/add_exe.cmake)
-include(cmake/add_so.cmake)
+include(cmake/target/add_exe.cmake)
+include(cmake/target/add_so.cmake)
 
 function(add_all_targets)
     foreach(arg IN LISTS ARGN)

@@ -16,10 +16,9 @@ add_all_targets(
     "EXE hello hello.c"
     # SO MySharedLibrary libsource1.c libsource2.c
 )
+
 add_all_tests()
 
-# Install hello to /bin
-install_target(hello "/bin")
+install_target(hello bin/)
 
-# Strip hello in release builds
 strip_target(hello)

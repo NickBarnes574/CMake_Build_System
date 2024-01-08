@@ -7,7 +7,10 @@
 # -----------------------------------------------------------------------------
 
 function(install_target target_name install_directory)
-    install(TARGETS ${target_name} DESTINATION ${install_directory})
+    message(STATUS "*** installing target ***")
+    set_target_properties(${target_name} PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/${install_directory}/${CMAKE_SYSTEM_PROCESSOR}
+    )
 endfunction()
 
 # *** end of file ***
