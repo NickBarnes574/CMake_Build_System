@@ -9,6 +9,7 @@ project(CMakeBuildSystem
 )
 
 include(cmake/buildsystem.cmake)
+include(libraries/0_Common/common_sources.cmake)
 
 # Call add_all_targets with the list of targets
 # Each target is specified as a list of: type (EXE or SO), name, and source files
