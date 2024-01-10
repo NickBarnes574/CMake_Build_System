@@ -11,5 +11,6 @@ set(tools /opt/aarch64--glibc--stable-2023.11-1)
 set(CMAKE_C_COMPILER ${tools}/bin/aarch64-linux-gcc)
 set(CMAKE_CXX_COMPILER ${tools}/bin/aarch64-linux-g++)
 set(CMAKE_FIND_ROOT_PATH ${tools})
+set(CMAKE_STRIP ${tools}/bin/aarch64-linux-strip)
 
 # *** end of file ***

@@ -8,9 +8,11 @@
 
 function(install_target target_name install_directory)
     message(STATUS "*** installing target ***")
-    set_target_properties(${target_name} PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/${install_directory}/${CMAKE_SYSTEM_PROCESSOR}
+
+    install(TARGETS ${target_name}
+        RUNTIME DESTINATION ${install_directory}
     )
+
 endfunction()
 
 # *** end of file ***

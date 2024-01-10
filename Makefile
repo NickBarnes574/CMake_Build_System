@@ -1,26 +1,23 @@
-.PHONY: setup release debug aarch64 clean
-
 MAKEFLAGS += --no-print-directory
 
 default: release
 
-setup:
-	@mkdir -p build/ bin/
+release:
+	@cmake -S . -B build/x86_64 -DCMAKE_BUILD_TYPE=Release
+	@cmake --build build/x86_64 --target install
 
-release: setup
-	@mkdir -p build/x86_64/
-	@cd build/x86_64/ && cmake ../.. -DCMAKE_BUILD_TYPE=Release
-	@cmake --build build/x86_64/
+debug:
+	@cmake -S . -B build/x86_64 -DCMAKE_BUILD_TYPE=Debug
+	@cmake --build build/x86_64 --target install
 
-debug: setup
-	@mkdir -p build/x86_64/
-	@cd build/x86_64/ && cmake ../.. -DCMAKE_BUILD_TYPE=Debug
-	@cmake --build build/x86_64/
-
-aarch64: setup
-	@mkdir -p build/aarch64/
-	@cd build/aarch64/ && cmake ../.. -DCMAKE_TOOLCHAIN_FILE=../../cmake/toolchains/aarch64-glibc-toolchain.cmake
-	@cmake --build build/aarch64/
+aarch64:
+	@cmake -S . -B build/aarch64 -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=cmake/toolchains/aarch64-glibc-toolchain.cmake
+	@cmake --build build/aarch64 --target install
 
 clean:
-	@rm -rf build/ bin/
+	@rm -rf build
+	@rm -rf debug
+	@rm -rf release
+	@rm -rf docs/*.pdf
+
+.PHONY: setup release debug clean aarch64

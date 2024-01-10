@@ -4,16 +4,28 @@
 # the project.
 # -----------------------------------------------------------------------------
 
-# Define a function to add an executable
-function(add_exe exe_name)
-    # Add an executable with the given name and source files
-    add_executable(${exe_name} ${ARGN})
+set(INSTALL_DEST_RELEASE_DEPLOY_REMOTE "${CMAKE_SOURCE_DIR}/release/deploy/remote")
+set(INSTALL_DEST_DEBUG_DEPLOY_REMOTE "${CMAKE_SOURCE_DIR}/debug/deploy/remote")
 
-    # Example of setting additional properties or custom configurations
-    # You can modify or remove this part according to your needs
-    set_target_properties(${exe_name} PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
+function(add_exe TARGET_NAME SRC_FILES INCLUDE_FILES)
+    set(FULL_TARGET_NAME "${TARGET_NAME}_${CMAKE_SYSTEM_PROCESSOR}")
+    add_executable(${FULL_TARGET_NAME} ${SRC_FILES})
+    target_include_directories(${FULL_TARGET_NAME} PRIVATE ${INCLUDE_FILES})
+
+    # Link libraries
+    target_include_directories(${FULL_TARGET_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/libraries/0_Common/include)
+    target_link_libraries(${FULL_TARGET_NAME} PRIVATE Common)
+
+    if(CMAKE_BUILD_TYPE MATCHES "Release")
+        set_default_release_options(${FULL_TARGET_NAME})
+        strip_target(${FULL_TARGET_NAME})
+        install_target(${FULL_TARGET_NAME} ${INSTALL_DEST_RELEASE_DEPLOY_REMOTE})
+
+    elseif(CMAKE_BUILD_TYPE MATCHES "Debug")
+        set_default_debug_options(${FULL_TARGET_NAME})
+        install_target(${FULL_TARGET_NAME} ${INSTALL_DEST_DEBUG_DEPLOY_REMOTE})
+    endif()
+
 endfunction()
 
 # *** end of file ***

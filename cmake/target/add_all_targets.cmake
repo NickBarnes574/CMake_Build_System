@@ -5,30 +5,21 @@
 # based on the specified target type.
 # -----------------------------------------------------------------------------
 
-include(cmake/target/add_exe.cmake)
-include(cmake/target/add_so.cmake)
-
 function(add_all_targets)
-    foreach(arg IN LISTS ARGN)
-        # Parse the argument into a list separated by spaces
-        string(REPLACE " " ";" arg_list "${arg}")
 
-        # Get the target type and name
-        list(GET arg_list 0 target_type)
-        list(GET arg_list 1 target_name)
+    # Target 1
+    set(PROJECT_DIR ${CMAKE_SOURCE_DIR}/project)
 
-        # Remove the first two elements (target type and name)
-        list(REMOVE_AT arg_list 0 1)
+    set(PROJECT_SOURCES
+        ${PROJECT_DIR}/src/hello.c
+    )
 
-        # Add the target based on the target type
-        if(target_type STREQUAL "EXE")
-            add_exe(${target_name} ${arg_list})
-        elseif(target_type STREQUAL "SO")
-            add_so(${target_name} ${arg_list})
-        else()
-            message(FATAL_ERROR "Unknown target type: ${target_type}")
-        endif()
-    endforeach()
+    set(PROJECT_INCLUDES
+        ${PROJECT_DIR}/include
+    )
+
+    add_exe(hello_world "${PROJECT_SOURCES}" "${PROJECT_INCLUDES}")
+
 endfunction()
 
 # *** end of file ***
