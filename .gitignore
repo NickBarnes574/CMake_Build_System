@@ -1,6 +1,7 @@
-build/
-release/
-debug/
-docs/
+/build/
+/release/
+/debug/
+/docs/
+CMakeFiles/
 
 .vscode

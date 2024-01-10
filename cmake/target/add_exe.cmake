@@ -7,15 +7,16 @@
 set(INSTALL_DEST_RELEASE_DEPLOY_REMOTE "${CMAKE_SOURCE_DIR}/release/deploy/remote")
 set(INSTALL_DEST_DEBUG_DEPLOY_REMOTE "${CMAKE_SOURCE_DIR}/debug/deploy/remote")
 
-function(add_exe TARGET_NAME SRC_FILES INCLUDE_FILES)
+function(add_exe TARGET_NAME SRC_FILES INCLUDE_FILES LINK_LIBRARIES)
     set(FULL_TARGET_NAME "${TARGET_NAME}_${CMAKE_SYSTEM_PROCESSOR}")
     add_executable(${FULL_TARGET_NAME} ${SRC_FILES})
     target_include_directories(${FULL_TARGET_NAME} PRIVATE ${INCLUDE_FILES})
 
-    # Link libraries
-    target_include_directories(${FULL_TARGET_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/libraries/0_Common/include)
-    target_link_libraries(${FULL_TARGET_NAME} PRIVATE Common)
-
+    foreach(LIB IN LISTS LINK_LIBRARIES)
+        message(STATUS "Linking library ${LIB} to ${FULL_TARGET_NAME}")
+        target_link_libraries(${FULL_TARGET_NAME} PRIVATE ${LIB})
+    endforeach()
+    
     if(CMAKE_BUILD_TYPE MATCHES "Release")
         set_default_release_options(${FULL_TARGET_NAME})
         strip_target(${FULL_TARGET_NAME})

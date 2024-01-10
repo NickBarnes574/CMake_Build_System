@@ -1,1 +1,0 @@
-/opt/aarch64--glibc--stable-2023.11-1/bin/aarch64-linux-gcc -fPIC   -shared -Wl,-soname,libMath.so -o libMath.so CMakeFiles/Math.dir/libraries/1_Math/src/number_converter.c.o  -Wl,-rpath,/home/devbox/Programming/CMake_Build_System libCommon.so 

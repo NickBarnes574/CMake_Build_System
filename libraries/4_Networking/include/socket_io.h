@@ -3,6 +3,10 @@
 
 #include <stdint.h>
 
+#define MIN_SOCKET 3 // The lowest allowable user-defined socket
+#define MAX_BYTES \
+    (size_t)1400 // Max number of bytes to send or received at once
+
 /**
  * @brief Sends the specified number of bytes to a given socket.
  *

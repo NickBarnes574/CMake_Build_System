@@ -4,11 +4,11 @@ function(add_all_libraries)
     setup_library(Math "1_Math")
     setup_library(DSA "2_DataStructures")
     setup_library(Threading "3_Threading")
-    #setup_library(Networking "4_Networking")
+    setup_library(Networking "4_Networking")
 
     # Link libraries
     target_link_libraries(Math PUBLIC Common)
     target_link_libraries(DSA PUBLIC Common)
     target_link_libraries(Threading PUBLIC Common DSA pthread)
-    #target_link_libraries(Networking PUBLIC Common Threading)
+    target_link_libraries(Networking PUBLIC Common Threading)
 endfunction()

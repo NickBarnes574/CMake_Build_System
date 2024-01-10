@@ -1,4 +1,3 @@
-#include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/socket.h>
@@ -7,10 +6,6 @@
 
 #include "socket_io.h"
 #include "utilities.h"
-
-#define MIN_SOCKET 3 // The lowest allowable user-defined socket
-#define MAX_BYTES \
-    (size_t)1400 // Max number of bytes to send or received at once
 
 /**
  * @brief Calculates the chunk size to be processed, based on the remaining
@@ -26,6 +21,8 @@
  */
 static size_t calculate_chunk(size_t bytes_to_process, size_t bytes_processed);
 
+// Covers [4.1.13] - send()
+// Covers [4.8.1] - Handle partial reads and writes
 int send_data(int socket, void * buffer_p, size_t bytes_to_send)
 {
     int       exit_code        = E_FAILURE;
@@ -89,6 +86,7 @@ END:
     return exit_code;
 }
 
+// Covers [4.1.13] - recv()
 int recv_data(int socket, void * buffer_p, size_t bytes_to_recv)
 {
     int       exit_code            = E_FAILURE;
@@ -100,19 +98,19 @@ int recv_data(int socket, void * buffer_p, size_t bytes_to_recv)
 
     if (NULL == buffer_p)
     {
-        print_error("recv_data(): NULL argument passed.");
+        print_error("NULL argument passed.");
         goto END;
     }
 
     if (0 == bytes_to_recv)
     {
-        print_error("recv_data(): Nothing to receive.");
+        print_error("Nothing to receive.");
         goto END;
     }
 
     if (MIN_SOCKET > socket)
     {
-        print_error("recv_data(): Invalid socket.");
+        print_error("Invalid socket.");
         goto END;
     }
 
@@ -127,7 +125,7 @@ int recv_data(int socket, void * buffer_p, size_t bytes_to_recv)
         byte_result = recv(socket, position, chunk, 0);
         if (E_FAILURE == byte_result)
         {
-            print_error("recv_data(): Error receiving data.");
+            print_error("Error receiving data.");
             goto END;
         }
 
@@ -137,7 +135,7 @@ int recv_data(int socket, void * buffer_p, size_t bytes_to_recv)
             // Check if data finished transferring
             if (total_bytes_received < bytes_to_recv)
             {
-                print_error("recv_data(): Connection closed unexpectedly.");
+                print_error("Connection closed unexpectedly.");
                 goto END;
             }
 

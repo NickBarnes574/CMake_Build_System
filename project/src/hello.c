@@ -4,5 +4,6 @@
 int main()
 {
     printf("Hello World!\n");
+    print_error("goofy");
     return 0;
 }

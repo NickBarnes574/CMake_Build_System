@@ -18,7 +18,9 @@ function(add_all_targets)
         ${PROJECT_DIR}/include
     )
 
-    add_exe(hello_world "${PROJECT_SOURCES}" "${PROJECT_INCLUDES}")
+    set(PROJECT_LIBRARIES Common Math DSA Threading Networking)
+
+    add_exe(hello_world "${PROJECT_SOURCES}" "${PROJECT_INCLUDES}" "${PROJECT_LIBRARIES}")
 
 endfunction()
 

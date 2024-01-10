@@ -16,8 +16,8 @@ aarch64:
 
 clean:
 	@rm -rf build
-	@rm -rf debug
 	@rm -rf release
-	@rm -rf docs/*.pdf
+	@rm -rf debug
+	@rm -rf docs
 
 .PHONY: setup release debug clean aarch64
