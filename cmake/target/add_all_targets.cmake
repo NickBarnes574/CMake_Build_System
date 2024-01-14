@@ -7,10 +7,10 @@
 
 function(add_all_targets)
 
-    # Target 1
+    # Remote Target 1
     set(PROJECT_DIR ${CMAKE_SOURCE_DIR}/project)
-    set(PROJECT_SOURCES ${PROJECT_DIR}/src/hello.c)
-    set(PROJECT_INCLUDES ${PROJECT_DIR}/include)
+    set(PROJECT_SOURCES ${PROJECT_DIR}/remote/src/hello.c)
+    set(PROJECT_INCLUDES ${PROJECT_DIR}/remote/include)
     set(PROJECT_LIBRARIES Common Math DSA Threading Networking)
 
     add_exe(hello_world "${PROJECT_SOURCES}" "${PROJECT_INCLUDES}" "${PROJECT_LIBRARIES}")

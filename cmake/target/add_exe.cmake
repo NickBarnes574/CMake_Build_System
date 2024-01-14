@@ -4,8 +4,8 @@
 # the project.
 # -----------------------------------------------------------------------------
 
-set(INSTALL_DEST_RELEASE_DEPLOY_REMOTE "${CMAKE_SOURCE_DIR}/release/deploy/remote")
-set(INSTALL_DEST_DEBUG_DEPLOY_REMOTE "${CMAKE_SOURCE_DIR}/debug/deploy/remote")
+set(INSTALL_DEST_BUILD_RELEASE_REMOTE "${CMAKE_SOURCE_DIR}/build/release/remote")
+set(INSTALL_DEST_BUILD_DEBUG_REMOTE "${CMAKE_SOURCE_DIR}/build/debug/remote")
 
 function(add_exe TARGET_NAME SRC_FILES INCLUDE_FILES LINK_LIBRARIES)
     set(FULL_TARGET_NAME "${TARGET_NAME}_${CMAKE_SYSTEM_PROCESSOR}")
@@ -20,11 +20,11 @@ function(add_exe TARGET_NAME SRC_FILES INCLUDE_FILES LINK_LIBRARIES)
     if(CMAKE_BUILD_TYPE MATCHES "Release")
         set_default_release_options(${FULL_TARGET_NAME})
         strip_target(${FULL_TARGET_NAME})
-        install_target(${FULL_TARGET_NAME} ${INSTALL_DEST_RELEASE_DEPLOY_REMOTE})
+        install_target(${FULL_TARGET_NAME} ${INSTALL_DEST_BUILD_RELEASE_REMOTE})
 
     elseif(CMAKE_BUILD_TYPE MATCHES "Debug")
         set_default_debug_options(${FULL_TARGET_NAME})
-        install_target(${FULL_TARGET_NAME} ${INSTALL_DEST_DEBUG_DEPLOY_REMOTE})
+        install_target(${FULL_TARGET_NAME} ${INSTALL_DEST_BUILD_DEBUG_REMOTE})
     endif()
 
 endfunction()
