@@ -21,9 +21,9 @@ string(CONCAT CLANG_TIDY_CHECKS
     "-android-cloexec-accept,"
 )
 
-find_program(CLANG_TIDY_EXE NAMES "clang-tidy" REQUIRED)
+find_program(CLANG_TIDY_EXE NAMES "clang-tidy-14" REQUIRED)
 set(CMAKE_C_CLANG_TIDY
-    "clang-tidy" "-checks=${CLANG_TIDY_CHECKS}"
+    "clang-tidy-14" "-checks=${CLANG_TIDY_CHECKS}"
 )
 
 # *** end of file ***
