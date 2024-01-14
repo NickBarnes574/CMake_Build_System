@@ -11,3 +11,5 @@ function(set_default_debug_options)
     link_libraries(-fsanitize=address)
     add_compile_definitions(DEBUG)
 endfunction()
+
+# *** end of file ***

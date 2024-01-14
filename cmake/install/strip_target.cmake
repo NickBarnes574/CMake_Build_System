@@ -20,3 +20,5 @@ function(strip_target TARGET_NAME)
         COMMENT "Stripping ${NAME}"
     )
 endfunction()
+
+# *** end of file ***

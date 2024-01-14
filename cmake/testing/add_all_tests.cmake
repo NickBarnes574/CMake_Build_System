@@ -11,3 +11,5 @@ function(add_all_tests)
     # This is a placeholder and should be adapted based on your project structure
     # Example: add_gtest(MyExecutable tests/my_executable_tests.cpp)
 endfunction()
+
+# *** end of file ***

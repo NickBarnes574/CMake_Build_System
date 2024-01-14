@@ -18,3 +18,5 @@ function(add_gtest target_name test_source_files)
     # Add to CTest
     add_test(NAME ${target_name}_gtest COMMAND ${target_name}_gtest)
 endfunction()
+
+# *** end of file ***

@@ -16,3 +16,5 @@ function(setup_library LIB_NAME DIR_SUFFIX)
     # Specify the public include directories for the library
     target_include_directories(${LIB_NAME} PUBLIC ${LIB_INCLUDES})
 endfunction()
+
+# *** end of file ***
