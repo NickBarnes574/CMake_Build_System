@@ -7,13 +7,24 @@
 
 function(add_all_targets)
 
-    # Remote Target 1
+    # Remote Target 1 - hello_world
     set(PROJECT_DIR ${CMAKE_SOURCE_DIR}/project)
     set(PROJECT_SOURCES ${PROJECT_DIR}/remote/src/hello.c)
     set(PROJECT_INCLUDES ${PROJECT_DIR}/remote/include)
     set(PROJECT_LIBRARIES Common Math DSA Threading Networking)
 
     add_exe(hello_world "${PROJECT_SOURCES}" "${PROJECT_INCLUDES}" "${PROJECT_LIBRARIES}")
+
+    # Remote Target 2 - blink
+    set(PROJECT_DIR ${CMAKE_SOURCE_DIR}/project)
+    set(PROJECT_SOURCES
+        ${PROJECT_DIR}/remote/src/blink.c
+        ${PROJECT_DIR}/remote/src/request_handler.c
+    )
+    set(PROJECT_INCLUDES ${PROJECT_DIR}/remote/include)
+    set(PROJECT_LIBRARIES Common Math DSA Threading Networking)
+
+    add_exe(blink "${PROJECT_SOURCES}" "${PROJECT_INCLUDES}" "${PROJECT_LIBRARIES}")
 
 endfunction()
 
