@@ -37,7 +37,7 @@ aarch64:
 	@rm -rf build/artifacts
 
 clean:
-	@rm -rf build
+	@rm -rf build .vscode
 
 .PHONY: release debug clean aarch64 all
 
