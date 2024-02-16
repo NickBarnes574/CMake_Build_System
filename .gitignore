@@ -1,0 +1,10 @@
+/build/
+/deploy/
+/release/
+/debug/
+/docs/
+CMakeFiles/
+
+/.vscode
+
+# *** end of file ***
