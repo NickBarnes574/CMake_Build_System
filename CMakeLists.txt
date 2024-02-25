@@ -8,6 +8,9 @@ project(CMakeBuildSystem
     LANGUAGES C
 )
 
+# Utilities
+include(${CMAKE_SOURCE_DIR}/cmake/utilities.cmake)
+
 #Define _GNU_SOURCE for GNU extensions
 add_definitions(-D_GNU_SOURCE)
 
