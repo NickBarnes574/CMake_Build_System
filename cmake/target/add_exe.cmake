@@ -4,9 +4,6 @@
 # the project.
 # -----------------------------------------------------------------------------
 
-# set(INSTALL_DEST_BUILD_RELEASE_REMOTE "${CMAKE_SOURCE_DIR}/build/release/remote")
-# set(INSTALL_DEST_BUILD_DEBUG_REMOTE "${CMAKE_SOURCE_DIR}/build/debug/remote")
-
 function(add_exe TARGET_NAME SRC_FILES INCLUDE_FILES LINK_LIBRARIES)
     set(FULL_TARGET_NAME "${TARGET_NAME}_${CMAKE_SYSTEM_PROCESSOR}")
     add_executable(${FULL_TARGET_NAME} ${SRC_FILES})
