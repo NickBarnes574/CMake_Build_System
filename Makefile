@@ -4,6 +4,7 @@
 # configurations.
 #
 # Targets:
+#   all:		Builds the project for all architectures.
 #   default:    Builds the project in the release configuration for x86_64.
 #   release:    Builds and installs the project in release mode for x86_64.
 #   debug:      Builds and installs the project in debug mode for x86_64.
