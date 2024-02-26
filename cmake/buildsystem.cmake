@@ -14,16 +14,9 @@ include_cmake_modules("target")
 include_cmake_modules("install")
 include_cmake_modules("testing")
 
-# Configure libraries
-#-----|FLAG NAME|-------|DESCRIPTION|-----------|VALUE|
-option(USE_COMMON       "Use Common library"      ON)
-option(USE_MATH         "Use Math library"        ON)
-option(USE_DSA          "Use DSA library"         ON)
-option(USE_THREADING    "Use Threading library"   ON)
-option(USE_NETWORKING   "Use Networking library"  ON)
-
 # Configure targets
-configure_target("hello_world" "REMOTE" "EXE" "project")
+include(${CMAKE_SOURCE_DIR}/cmake/configure_target.cmake)
+configure_target()
 
 # ------------IN PROGRESS------------
 

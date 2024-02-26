@@ -3,28 +3,36 @@
 # DESCRIPTION: Adds a target to the target list
 # -----------------------------------------------------------------------------
 
-function(add_target target_name endpoint target_type project_directory)
-    set(PROJECT_DIR "${CMAKE_SOURCE_DIR}/${project_directory}")
-
+function(add_target TARGET_NAME ENDPOINT TARGET_TYPE PROJECT_DIRECTORY LIBRARIES)
+    set(PROJECT_DIR "${CMAKE_SOURCE_DIR}/${PROJECT_DIRECTORY}")
     # Determine the endpoint directory
-    if(endpoint STREQUAL "LOCAL")
-        file(GLOB PROJECT_SOURCES "${PROJECT_DIR}/local/src/*.c")
-        set(PROJECT_INCLUDES ${PROJECT_DIR}/local/include)
-    elseif(endpoint STREQUAL "REMOTE")
-        file(GLOB PROJECT_SOURCES "${PROJECT_DIR}/remote/src/*.c")
-        set(PROJECT_INCLUDES ${PROJECT_DIR}/remote/include)
+
+    # Local endpoint
+    if(ENDPOINT STREQUAL "LOCAL")
+        file(GLOB SOURCES "${PROJECT_DIR}/local/src/*.c")
+        set(INCLUDES ${PROJECT_DIR}/local/include)
+    
+    # Remote endpoint
+    elseif(ENDPOINT STREQUAL "REMOTE")
+        file(GLOB SOURCES "${PROJECT_DIR}/remote/src/*.c")
+        message(STATUS "SOURCES: " ${SOURCES})
+        set(INCLUDES ${PROJECT_DIR}/remote/include)
     else()
         message(FATAL_ERROR "Invalid target endpoint. Must be 'LOCAL' or 'REMOTE'.")
     endif()
 
     # Determine the target type
-    if(target_type STREQUAL "EXE")
-        add_exe("${target_name}" "${PROJECT_SOURCES} ${PROJECT_INCLUDES} ${PROJECT_LIBRARIES}")
-    elseif(target_type STREQUAL "LIB")
+
+    # Executable program
+    if(TARGET_TYPE STREQUAL "EXE")
+        add_exe("${TARGET_NAME}" "${SOURCES}" "${INCLUDES}" "${LIBRARIES}")
+    
+    # Shared object library
+    elseif(TARGET_TYPE STREQUAL "LIB")
         # TODO: Add LIB functionality
         message(WARNING "Shared object library functionality not implemented yet.")
     else()
-        message FATAL_ERROR "Invalid target type. Must be 'EXE' or 'LIB'."
+        message(FATAL_ERROR "Invalid target type. Must be 'EXE' or 'LIB'.")
     endif()
 endfunction()
 
