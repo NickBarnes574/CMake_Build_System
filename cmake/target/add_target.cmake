@@ -3,20 +3,20 @@
 # DESCRIPTION: Adds a target to the target list
 # -----------------------------------------------------------------------------
 
-function(add_target TARGET_NAME ENDPOINT TARGET_TYPE PROJECT_DIRECTORY LIBRARIES)
-    set(PROJECT_DIR "${CMAKE_SOURCE_DIR}/${PROJECT_DIRECTORY}")
+function(add_target TARGET_NAME ENDPOINT TARGET_TYPE SOURCE_DIR DESTINATION_DIR LIBRARIES)
+    set(SOURCE "${CMAKE_SOURCE_DIR}/${SOURCE_DIR}")
     # Determine the endpoint directory
 
     # Local endpoint
     if(ENDPOINT STREQUAL "LOCAL")
-        file(GLOB SOURCES "${PROJECT_DIR}/local/src/*.c")
-        set(INCLUDES ${PROJECT_DIR}/local/include)
+        file(GLOB SOURCES "${SOURCE}/local/src/*.c")
+        set(INCLUDES ${SOURCE}/local/include)
     
     # Remote endpoint
     elseif(ENDPOINT STREQUAL "REMOTE")
-        file(GLOB SOURCES "${PROJECT_DIR}/remote/src/*.c")
+        file(GLOB SOURCES "${SOURCE}/remote/src/*.c")
         message(STATUS "SOURCES: " ${SOURCES})
-        set(INCLUDES ${PROJECT_DIR}/remote/include)
+        set(INCLUDES ${SOURCE}/remote/include)
     else()
         message(FATAL_ERROR "Invalid target endpoint. Must be 'LOCAL' or 'REMOTE'.")
     endif()
@@ -25,7 +25,7 @@ function(add_target TARGET_NAME ENDPOINT TARGET_TYPE PROJECT_DIRECTORY LIBRARIES
 
     # Executable program
     if(TARGET_TYPE STREQUAL "EXE")
-        add_exe("${TARGET_NAME}" "${ENDPOINT}" "${SOURCES}" "${INCLUDES}" "${LIBRARIES}")
+        add_exe("${TARGET_NAME}" "${ENDPOINT}" "${SOURCES}" "${INCLUDES}" "${LIBRARIES}" "${DESTINATION_DIR}")
     
     # Shared object library
     elseif(TARGET_TYPE STREQUAL "LIB")

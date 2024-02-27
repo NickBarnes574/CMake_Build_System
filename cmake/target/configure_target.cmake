@@ -6,7 +6,7 @@
 
 function(configure_target)
     set(options "")
-    set(singleValueArgs TARGET_NAME ENDPOINT TARGET_TYPE PROJECT_DIRECTORY)
+    set(singleValueArgs TARGET_NAME ENDPOINT TARGET_TYPE SOURCE_DIR DESTINATION_DIR)
     set(multiValueArgs LIBRARIES)
 
     # Parse the function arguments
@@ -14,7 +14,7 @@ function(configure_target)
 
     # Display the configuration status
     message(STATUS "Configuring target: ${ARG_TARGET_NAME}")
-    message(STATUS "Type: ${ARG_TARGET_TYPE}, Endpoint: ${ARG_ENDPOINT}, Directory: ${ARG_PROJECT_DIRECTORY}")
+    message(STATUS "Type: ${ARG_TARGET_TYPE}, Endpoint: ${ARG_ENDPOINT}, Source: ${ARG_SOURCE_DIR}, Destination: ${ARG_DESTINATION_DIR}")
     message(STATUS "Libraries: ${ARG_LIBRARIES}")
 
     if ("${ARG_LIBRARIES}" STREQUAL "")
@@ -23,7 +23,7 @@ function(configure_target)
     endif()
 
     # Add the target
-    add_target(${ARG_TARGET_NAME} ${ARG_ENDPOINT} ${ARG_TARGET_TYPE} ${ARG_PROJECT_DIRECTORY} ${ARG_LIBRARIES})
+    add_target(${ARG_TARGET_NAME} ${ARG_ENDPOINT} ${ARG_TARGET_TYPE} ${ARG_SOURCE_DIR} ${ARG_DESTINATION_DIR} ${ARG_LIBRARIES})
 endfunction()
 
 # *** end of file ***
