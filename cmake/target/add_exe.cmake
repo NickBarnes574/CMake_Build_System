@@ -4,24 +4,39 @@
 # the project.
 # -----------------------------------------------------------------------------
 
-function(add_exe TARGET_NAME SRC_FILES INCLUDE_FILES LINK_LIBRARIES)
+function(add_exe TARGET_NAME ENDPOINT SRC_FILES INCLUDE_FILES LINK_LIBRARIES)
     set(FULL_TARGET_NAME "${TARGET_NAME}_${CMAKE_SYSTEM_PROCESSOR}")
     add_executable(${FULL_TARGET_NAME} ${SRC_FILES})
     target_include_directories(${FULL_TARGET_NAME} PRIVATE ${INCLUDE_FILES})
 
-    foreach(LIB IN LISTS LINK_LIBRARIES)
-        message(STATUS "Linking library ${LIB} to ${FULL_TARGET_NAME}")
-        target_link_libraries(${FULL_TARGET_NAME} PRIVATE ${LIB})
-    endforeach()
+    # Link libraries if any are passed in
+    if(NOT LINK_LIBRARIES STREQUAL "NONE")
+        foreach(LIB IN LISTS LINK_LIBRARIES)
+            message(STATUS "Linking library ${LIB} to ${FULL_TARGET_NAME}")
+            target_link_libraries(${FULL_TARGET_NAME} PRIVATE ${LIB})
+        endforeach()
+    endif()
     
     if(CMAKE_BUILD_TYPE MATCHES "Release")
         set_default_release_options(${FULL_TARGET_NAME})
         strip_target(${FULL_TARGET_NAME})
-        install_target(${FULL_TARGET_NAME} ${INSTALL_DEST_BUILD_RELEASE_REMOTE})
+        if (ENDPOINT STREQUAL "LOCAL")
+            install_target(${FULL_TARGET_NAME} ${DEST_RELEASE_LOCAL})
+        elseif(ENDPOINT STREQUAL "REMOTE")
+            install_target(${FULL_TARGET_NAME} ${DEST_RELEASE_REMOTE})
+        else()
+            message(FATAL_ERROR "Invalid Endpoint.")
+        endif()
 
     elseif(CMAKE_BUILD_TYPE MATCHES "Debug")
         set_default_debug_options(${FULL_TARGET_NAME})
-        install_target(${FULL_TARGET_NAME} ${INSTALL_DEST_BUILD_DEBUG_REMOTE})
+        if (ENDPOINT STREQUAL "LOCAL")
+            install_target(${FULL_TARGET_NAME} ${DEST_DEBUG_LOCAL})
+        elseif(ENDPOINT STREQUAL "REMOTE")
+            install_target(${FULL_TARGET_NAME} ${DEST_DEBUG_REMOTE})
+        else()
+            message(FATAL_ERROR "Invalid Endpoint.")
+        endif()
     endif()
 
 endfunction()

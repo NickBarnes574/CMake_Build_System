@@ -25,7 +25,7 @@ function(add_target TARGET_NAME ENDPOINT TARGET_TYPE PROJECT_DIRECTORY LIBRARIES
 
     # Executable program
     if(TARGET_TYPE STREQUAL "EXE")
-        add_exe("${TARGET_NAME}" "${SOURCES}" "${INCLUDES}" "${LIBRARIES}")
+        add_exe("${TARGET_NAME}" "${ENDPOINT}" "${SOURCES}" "${INCLUDES}" "${LIBRARIES}")
     
     # Shared object library
     elseif(TARGET_TYPE STREQUAL "LIB")
