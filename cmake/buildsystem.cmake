@@ -44,15 +44,4 @@ configure_target(
     LIBRARIES           # No libraries
 )
 
-# Create target 3
-configure_target(
-#  |Parameter|----------|Value|
-    TARGET_NAME         "hello_3"
-    ENDPOINT            "REMOTE"
-    TARGET_TYPE         "EXE"
-    SOURCE_DIR          "project_3"
-    DESTINATION_DIR     "projects"
-    LIBRARIES           Common Math DSA Threading Networking
-)
-
 # *** end of file ***
