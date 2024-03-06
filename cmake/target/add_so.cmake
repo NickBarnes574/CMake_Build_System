@@ -4,9 +4,7 @@
 # the project.
 # -----------------------------------------------------------------------------
 
-# Define a function to add a shared library
 function(add_so lib_name)
-    # Add a shared library with the given name and source files
     add_library(${lib_name} SHARED ${ARGN})
 
     # Example of setting additional properties or custom configurations
