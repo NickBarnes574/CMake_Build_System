@@ -26,22 +26,11 @@ include_cmake_modules("testing")    # GTest configuration
 configure_target(
 #  |Parameter|----------|Value|
     TARGET_NAME         "hello_1"       # Name of the target
-    ENDPOINT            "REMOTE"        # Determines whether the target is remote or local
+    ENDPOINT            "LOCAL"        # Determines whether the target is remote or local
     TARGET_TYPE         "EXE"           # Can be an executable or an SO
-    SOURCE_DIR          "project_1"     # Top-level directory for the project source files
+    SOURCE_DIR          "projects/project_1"     # Top-level directory for the project source files
     DESTINATION_DIR     "projects"      # Top-level destination project directory
     LIBRARIES           Common Math DSA Threading Networking
-)
-
-# Create target 2
-configure_target(
-#  |Parameter|----------|Value|
-    TARGET_NAME         "hello_2"
-    ENDPOINT            "REMOTE"
-    TARGET_TYPE         "EXE"
-    SOURCE_DIR          "project_2"
-    DESTINATION_DIR     "projects"
-    LIBRARIES           # No libraries
 )
 
 # *** end of file ***

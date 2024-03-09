@@ -4,7 +4,6 @@ cmake_minimum_required(VERSION 3.16)
 # Project Name
 project(CMakeBuildSystem
     VERSION 1.0
-    DESCRIPTION "CMake Build System Project"
     LANGUAGES C
 )
 

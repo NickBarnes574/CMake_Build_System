@@ -15,7 +15,6 @@ function(add_target TARGET_NAME ENDPOINT TARGET_TYPE SOURCE_DIR DESTINATION_DIR 
     # Remote endpoint
     elseif(ENDPOINT STREQUAL "REMOTE")
         file(GLOB SOURCES "${SOURCE}/remote/src/*.c")
-        message(STATUS "SOURCES: " ${SOURCES})
         set(INCLUDES ${SOURCE}/remote/include)
     else()
         message(FATAL_ERROR "Invalid target endpoint. Must be 'LOCAL' or 'REMOTE'.")
