@@ -184,5 +184,3 @@ To use the `/opt` directory for storing your toolchain in a Linux environment, f
 
 7. **Gitignore the Toolchain (if using Git)**:
    - If your project is in a Git repository, make sure that the toolchain directory is listed in your `.gitignore` file to prevent it from being accidentally committed to your repository.
-
-By following these steps, you’ll have a centrally located toolchain in the `/opt` directory, which can be conveniently used across multiple projects or by multiple team members.

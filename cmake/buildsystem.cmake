@@ -4,30 +4,33 @@
 # process, and defines different build configurations.
 # -----------------------------------------------------------------------------
 
-# Checks
-include(${CMAKE_SOURCE_DIR}/cmake/checks/tidy-checks.cmake)
-include(${CMAKE_SOURCE_DIR}/cmake/checks/cmake-checks.cmake)
+# Build destination
+set(DEST_BUILD "${CMAKE_SOURCE_DIR}/build")
 
-# Options
-include(${CMAKE_SOURCE_DIR}/cmake/options/set_default_release_options.cmake)
-include(${CMAKE_SOURCE_DIR}/cmake/options/set_default_debug_options.cmake)
-include(${CMAKE_SOURCE_DIR}/cmake/options/disable_warnings.cmake) # (Used for tweetnacl.c)
+# Local destinations
+set(DEST_RELEASE_LOCAL "/release/local")
+set(DEST_DEBUG_LOCAL "/debug/local")
 
-# Libraries
-include(${CMAKE_SOURCE_DIR}/cmake/libraries/setup_library.cmake)
-include(${CMAKE_SOURCE_DIR}/cmake/libraries/add_all_libraries.cmake)
+# Remote destinations
+set(DEST_RELEASE_REMOTE "/release/remote")
+set(DEST_DEBUG_REMOTE "/debug/remote")
 
-# Add executable / shared object / all targets
-include(${CMAKE_SOURCE_DIR}/cmake/target/add_exe.cmake)
-include(${CMAKE_SOURCE_DIR}/cmake/target/add_so.cmake)
-include(${CMAKE_SOURCE_DIR}/cmake/target/add_all_targets.cmake)
+include_cmake_modules("checks")     # Clang-Tidy checks
+include_cmake_modules("options")    # Debug and Release options
+include_cmake_modules("libraries")  # Custom user-made libraries
+include_cmake_modules("target")     # Target management
+include_cmake_modules("install")    # Installation configuration
+include_cmake_modules("testing")    # GTest configuration
 
-# Strip / Install
-include(${CMAKE_SOURCE_DIR}/cmake/install/strip_target.cmake)
-include(${CMAKE_SOURCE_DIR}/cmake/install/install_target.cmake)
-
-# Testing
-include(${CMAKE_SOURCE_DIR}/cmake/testing/add_gtest.cmake)
-include(${CMAKE_SOURCE_DIR}/cmake/testing/add_all_tests.cmake)
+# Create target 1
+configure_target(
+#  |Parameter|----------|Value|
+    TARGET_NAME         "hello_1"       # Name of the target
+    ENDPOINT            "LOCAL"        # Determines whether the target is remote or local
+    TARGET_TYPE         "EXE"           # Can be an executable or an SO
+    SOURCE_DIR          "projects/project_1"     # Top-level directory for the project source files
+    DESTINATION_DIR     "projects"      # Top-level destination project directory
+    LIBRARIES           Common Math DSA Threading Networking
+)
 
 # *** end of file ***

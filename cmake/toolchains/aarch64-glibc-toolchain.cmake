@@ -3,6 +3,9 @@
 # DESCRIPTION: This CMake toolchain file is configured for cross-compiling
 # using the aarch64 toolchain, specifically targeting Linux systems with
 # the aarch64 architecture.
+#
+# NOTES: aarch64 toolchain can be downloaded at https://toolchains.bootlin.com.
+# Install the toolchain by unzipping it, and placing it the /opt directory.
 # -----------------------------------------------------------------------------
 
 set(CMAKE_SYSTEM_NAME Linux)

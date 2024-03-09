@@ -4,9 +4,11 @@ cmake_minimum_required(VERSION 3.16)
 # Project Name
 project(CMakeBuildSystem
     VERSION 1.0
-    DESCRIPTION "CMake Build System Project"
     LANGUAGES C
 )
+
+# Utilities
+include(${CMAKE_SOURCE_DIR}/cmake/utilities.cmake)
 
 #Define _GNU_SOURCE for GNU extensions
 add_definitions(-D_GNU_SOURCE)
@@ -14,8 +16,6 @@ add_definitions(-D_GNU_SOURCE)
 include(cmake/buildsystem.cmake)
 
 add_all_libraries()
-
-add_all_targets()
 
 add_all_tests()
 
