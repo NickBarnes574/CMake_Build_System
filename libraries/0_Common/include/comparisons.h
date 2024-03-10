@@ -11,8 +11,8 @@ typedef enum comp_rtns
 {
     ERROR = -1,
     EQUAL,
-    ONE,
-    TWO,
+    GREATER_THAN,
+    LESS_THAN,
     NOT_EQUAL
 } comp_rtns_t;
 
@@ -28,8 +28,8 @@ typedef comp_rtns_t (*CMP_F)(void *, void *);
  *
  * @param p_node_one_data pointer to the data from the first source
  * @param p_node_two_data pointer to the data from the second source
- * @return EQUAL (if equal), ONE (if one is larger), TWO (if two is larger),
- * ERROR (on error)
+ * @return EQUAL (if equal), GREATER_THAN (if first argument is larger),
+ * LESS_THAN (if first_argument is less), ERROR (on error)
  */
 comp_rtns_t int_comp(void * p_node_one_data, void * p_node_two_data);
 

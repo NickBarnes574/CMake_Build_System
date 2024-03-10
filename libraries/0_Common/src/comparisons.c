@@ -27,13 +27,13 @@ comp_rtns_t int_comp(void * p_node_one_data, void * p_node_two_data)
 
     if (data_one > data_two)
     {
-        result = ONE;
+        result = GREATER_THAN;
         goto END;
     }
 
-    if (data_two > data_one)
+    if (data_one < data_two)
     {
-        result = TWO;
+        result = LESS_THAN;
         goto END;
     }
 
