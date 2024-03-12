@@ -200,7 +200,7 @@ list_node_t * list_peek_position(list_t * list, uint32_t position);
  * @param item_to_remove the data object to be searched for
  * @return 0 on success, non-zero value on failure
  */
-int list_remove_data(list_t * list, void ** item_to_remove);
+int list_remove_data(list_t * list, void * data_p);
 
 /**
  * @brief perform a user defined action on the data contained in all of the

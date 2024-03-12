@@ -3,9 +3,13 @@
 # DESCRIPTION: Adds a target to the target list
 # -----------------------------------------------------------------------------
 
-function(add_target TARGET_NAME ENDPOINT TARGET_TYPE SOURCE_DIR DESTINATION_DIR LIBRARIES)
+function(add_target TARGET_NAME ENDPOINT TARGET_TYPE SOURCE_DIR DESTINATION_DIR)
     set(SOURCE "${CMAKE_SOURCE_DIR}/${SOURCE_DIR}")
     # Determine the endpoint directory
+
+    # Use ARGN to capture all additional arguments, which include libraries
+    set(LIBRARIES ${ARGN})
+    message(STATUS "add_target() Libraries: ${LIBRARIES}")
 
     # Local endpoint
     if(ENDPOINT STREQUAL "LOCAL")
@@ -24,7 +28,7 @@ function(add_target TARGET_NAME ENDPOINT TARGET_TYPE SOURCE_DIR DESTINATION_DIR 
 
     # Executable program
     if(TARGET_TYPE STREQUAL "EXE")
-        add_exe("${TARGET_NAME}" "${ENDPOINT}" "${SOURCES}" "${INCLUDES}" "${LIBRARIES}" "${DESTINATION_DIR}")
+        add_exe("${TARGET_NAME}" "${ENDPOINT}" "${SOURCES}" "${INCLUDES}" "${DESTINATION_DIR}" ${LIBRARIES})
     
     # Shared object library
     elseif(TARGET_TYPE STREQUAL "LIB")

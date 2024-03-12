@@ -30,7 +30,7 @@ configure_target(
     TARGET_TYPE         "EXE"           # Can be an executable or an SO
     SOURCE_DIR          "projects/project_1"     # Top-level directory for the project source files
     DESTINATION_DIR     "projects"      # Top-level destination project directory
-    LIBRARIES           Common Math DSA Threading Networking
+    LIBRARIES Common Math DSA Threading Networking
 )
 
 # *** end of file ***

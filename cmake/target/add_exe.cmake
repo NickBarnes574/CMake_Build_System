@@ -4,7 +4,9 @@
 # the project.
 # -----------------------------------------------------------------------------
 
-function(add_exe TARGET_NAME ENDPOINT SRC_FILES INCLUDE_FILES LINK_LIBRARIES DESTINATION_DIR)
+function(add_exe TARGET_NAME ENDPOINT SRC_FILES INCLUDE_FILES DESTINATION_DIR)
+    # Use ARGN to capture all additional arguments, which include libraries
+    set(LINK_LIBRARIES ${ARGN})
     set(FULL_TARGET_NAME "${TARGET_NAME}_${CMAKE_SYSTEM_PROCESSOR}")
     add_executable(${FULL_TARGET_NAME} ${SRC_FILES})
     target_include_directories(${FULL_TARGET_NAME} PRIVATE ${INCLUDE_FILES})
@@ -13,6 +15,7 @@ function(add_exe TARGET_NAME ENDPOINT SRC_FILES INCLUDE_FILES LINK_LIBRARIES DES
     if(NOT LINK_LIBRARIES STREQUAL "NONE")
         foreach(LIB IN LISTS LINK_LIBRARIES)
             message(STATUS "Linking library ${LIB} to ${FULL_TARGET_NAME}")
+            message(STATUS "Linking libraries: ${LINK_LIBRARIES}")
             target_link_libraries(${FULL_TARGET_NAME} PRIVATE ${LIB})
         endforeach()
     endif()

@@ -179,7 +179,7 @@ int list_push_position(list_t * list, void * data, uint32_t position)
         goto END;
     }
 
-    if ((0 > position) || (position > list->size))
+    if (position > list->size)
     {
         print_error("Position out of bounds.");
         goto END;
@@ -312,7 +312,7 @@ list_node_t * list_pop_position(list_t * list, uint32_t position)
         goto END;
     }
 
-    if ((0 > position) || (position >= list->size))
+    if (position >= list->size)
     {
         print_error("Position out of bounds.");
         goto END;
@@ -407,7 +407,7 @@ int list_remove_position(list_t * list, uint32_t position)
         goto END;
     }
 
-    if ((0 > position) || (position >= list->size))
+    if (position >= list->size)
     {
         print_error("Position out of bounds.");
         goto END;
@@ -466,7 +466,7 @@ list_node_t * list_peek_position(list_t * list, uint32_t position)
         goto END;
     }
 
-    if ((0 > position) || (position >= list->size))
+    if (position >= list->size)
     {
         print_error("Position out of bounds.");
         goto END;
@@ -482,18 +482,18 @@ END:
     return current_node;
 }
 
-int list_remove_data(list_t * list, void ** item_to_remove)
+int list_remove_data(list_t * list, void * data_p)
 {
     int           exit_code      = E_FAILURE;
     list_node_t * node_to_remove = NULL;
 
-    if (NULL == list || NULL == item_to_remove || NULL == *item_to_remove)
+    if ((NULL == list) || (NULL == data_p))
     {
         print_error("NULL argument passed.");
         goto END;
     }
 
-    node_to_remove = find_node(list, *item_to_remove);
+    node_to_remove = find_node(list, data_p);
     if (NULL != node_to_remove)
     {
         remove_node(list, node_to_remove);
@@ -622,14 +622,14 @@ int list_clear(list_t * list)
 
     if (NULL == list)
     {
-        print_error("NULL argument passed.");
+        print_error("list_clear(): NULL argument passed.");
         goto END;
     }
 
     current_node = list->head;
     if (NULL == current_node)
     {
-        print_error("Empty list.");
+        print_error("list_clear(): Empty list.");
         goto END;
     }
 
@@ -659,14 +659,14 @@ int list_delete(list_t ** list_address)
 
     if (NULL == *list_address)
     {
-        print_error("NULL argument passed.");
+        print_error("list_delete(): NULL argument passed.");
         goto END;
     }
 
     exit_code = list_clear(*list_address);
     if (E_SUCCESS != exit_code)
     {
-        print_error("Unable to clear list.");
+        print_error("list_delete(): Unable to clear list.");
         goto END;
     }
 

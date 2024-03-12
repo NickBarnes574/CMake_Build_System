@@ -15,6 +15,8 @@ function(configure_target)
     # Display the configuration status
     message(STATUS "Configuring target: ${ARG_TARGET_NAME}")
     message(STATUS "Type: ${ARG_TARGET_TYPE}, Endpoint: ${ARG_ENDPOINT}, Source: ${ARG_SOURCE_DIR}, Destination: ${ARG_DESTINATION_DIR}")
+    string(REPLACE ";" " " LIBRARIES_STR "${ARG_LIBRARIES}")
+    message(STATUS "configure_target() Libraries as a string: ${LIBRARIES_STR}")
     message(STATUS "Libraries: ${ARG_LIBRARIES}")
 
     if ("${ARG_LIBRARIES}" STREQUAL "")
