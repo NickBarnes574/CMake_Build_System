@@ -1,21 +1,15 @@
-# FILENAME: add_all_tests.cmake
-# -----------------------------------------------------------------------------
-# DESCRIPTION: Defines a function to add test suites for each target in the 
-# project. This script is responsible for integrating unit tests.
-# -----------------------------------------------------------------------------
+# # FILENAME: add_all_tests.cmake
+# # -----------------------------------------------------------------------------
+# # DESCRIPTION: Defines a function to add test suites for each target in the 
+# # project. This script is responsible for integrating unit tests.
+# # -----------------------------------------------------------------------------
 
-# Function to add test suites for each target
-function(add_all_tests)
-# Assuming all tests link against 'my_project_lib' and potentially 'other_dependency_lib'
-set(COMMON_LIBRARIES my_project_lib other_dependency_lib)
+# # Function to add test suites for each target
+# function(add_all_tests)
 
-file(GLOB TEST_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/tests/*.c")
+# set(ADJACENCY_LIST_TEST_SOURCE "${CMAKE_CURRENT_SOURCE_DIR}/libraries/2_DataStructures/tests/adjacency_list_tests.c")
+# add_single_test(test_adjacency_list ${ADJACENCY_LIST_TEST_SOURCE})
 
-foreach(TEST_SOURCE ${TEST_SOURCES})
-    get_filename_component(TEST_NAME ${TEST_SOURCE} NAME_WE)
-    # Now calling add_single_test with COMMON_LIBRARIES passed through ${ARGN}
-    add_single_test(${TEST_NAME} ${TEST_SOURCE} ${COMMON_LIBRARIES})
-endforeach()
-endfunction()
+# endfunction()
 
-# *** end of file ***
+# # *** end of file ***

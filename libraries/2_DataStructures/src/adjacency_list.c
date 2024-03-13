@@ -1,9 +1,10 @@
 #include "adjacency_list.h"
 #include "utilities.h"
 
-void placeholder(void * data_p)
+void edge_list_free(void * data_p)
 {
     (void)data_p;
+    // free(data_p);
     return;
 }
 
@@ -68,7 +69,7 @@ node_t * graph_create_node(void * data_p)
 
     new_node_p->data_p      = data_p;
     new_node_p->edge_count  = 0;
-    new_node_p->edge_list_p = list_new(placeholder, NULL);
+    new_node_p->edge_list_p = list_new(edge_list_free, NULL);
     if (NULL == new_node_p->edge_list_p)
     {
         print_error("graph_create_node(): CMR failure.");
@@ -580,15 +581,18 @@ static void cleanup_node(graph_t * graph_p, node_t * node_p)
     node_p->data_p     = NULL;
     node_p->edge_count = 0;
 
-    exit_code = list_delete(&node_p->edge_list_p);
-    if (E_SUCCESS != exit_code)
-    {
-        print_error("graph_remove_node(): Unable to delete node's edge list.");
-    }
+    free(node_p->edge_list_p);
+    // exit_code = list_delete(&node_p->edge_list_p);
+    // if (E_SUCCESS != exit_code)
+    // {
+    //     print_error("graph_remove_node(): Unable to delete node's edge
+    //     list.");
+    // }
 
     free(node_p);
     node_p = NULL;
 
+    (void)exit_code;
 END:
     return;
 }

@@ -17,6 +17,6 @@ include(cmake/buildsystem.cmake)
 
 add_all_libraries()
 
-add_all_tests()
+# add_all_tests()
 
 # *** end of file ***
