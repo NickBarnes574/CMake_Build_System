@@ -4,16 +4,43 @@
 void edge_list_free(void * data_p)
 {
     (void)data_p;
-    // free(data_p);
     return;
 }
 
+/**
+ * @brief Collects all edges connected to a given node.
+ *
+ * This function is static and intended for internal use only.
+ *
+ * @param node_p A pointer to the node whose edges are to be collected.
+ * @param num_edges A pointer to size_t to store the number of edges found.
+ * @return edge_t** A pointer to an array of pointers to the collected edges.
+ */
 static edge_t ** collect_edges(node_t * node_p, size_t * num_edges);
 
+/**
+ * @brief Removes a set of edges from a graph.
+ *
+ * This function is static and intended for internal use only.
+ *
+ * @param graph_p A pointer to the graph from which edges are to be removed.
+ * @param edges_to_remove_pp A pointer to an array of pointers to edges to be
+ * removed.
+ * @param num_edges The number of edges to remove.
+ * @return int An integer indicating success (E_SUCCESS) or failure (E_FAILURE).
+ */
 static int remove_edges(graph_t * graph_p,
                         edge_t ** edges_to_remove_pp,
                         size_t    num_edges);
 
+/**
+ * @brief Cleans up and frees a node from a graph.
+ *
+ * This function is static and intended for internal use only.
+ *
+ * @param graph_p A pointer to the graph containing the node.
+ * @param node_p A pointer to the node to clean up.
+ */
 static void cleanup_node(graph_t * graph_p, node_t * node_p);
 
 graph_t * graph_create(FREE_F custom_free, CMP_F custom_compare)
@@ -108,10 +135,6 @@ int graph_add_node(graph_t * graph_p, void * data_p)
 
     graph_p->node_count += 1;
 
-    // DEBUG START
-    printf("Added node with data: '%s'\n", (char *)data_p);
-    // DEBUG END
-
     exit_code = E_SUCCESS;
 END:
     if (E_SUCCESS != exit_code)
@@ -168,10 +191,6 @@ int graph_remove_node(graph_t * graph_p, void * data_p)
     graph_p->node_count -= 1;
 
     cleanup_node(graph_p, node_p);
-
-    // DEBUG START
-    printf("Removed node with data: '%s'\n", (char *)data_p);
-    // DEBUG END
 
     exit_code = E_SUCCESS;
 END:
@@ -231,10 +250,6 @@ int graph_add_edge(graph_t * graph_p,
         goto END;
     }
     node_1_p->edge_count += 1;
-    // DEBUG START
-    printf("graph_add_edge(): node 1 edge_list size: %d\n",
-           node_1_p->edge_list_p->size);
-    // DEBUG END
 
     if (true == is_bidirectional)
     {
@@ -254,17 +269,7 @@ int graph_add_edge(graph_t * graph_p,
             goto END;
         }
         node_2_p->edge_count += 1;
-        // DEBUG START
-        printf("graph_add_edge(): node 2 edge_list size: %d\n",
-               node_2_p->edge_list_p->size);
-        // DEBUG END
     }
-
-    // DEBUG START
-    printf("Added edge between '%s' and '%s'\n",
-           (char *)data_1_p,
-           (char *)data_2_p);
-    // DEBUG END
 
     exit_code = E_SUCCESS;
 END:
@@ -320,10 +325,6 @@ int graph_remove_edge(graph_t * graph_p, void * data_1_p, void * data_2_p)
         goto END;
     }
     node_1_p->edge_count -= 1;
-    // DEBUG START
-    printf("graph_remove_edge(): node 1 edge_list size: %d\n",
-           node_1_p->edge_list_p->size);
-    // DEBUG END
 
     // Remove the edge from node 2's list if non-directed
     if (false == edge_p->is_directed)
@@ -337,20 +338,10 @@ int graph_remove_edge(graph_t * graph_p, void * data_1_p, void * data_2_p)
             goto END;
         }
         node_2_p->edge_count -= 1;
-        // DEBUG START
-        printf("graph_remove_edge(): node 2 edge_list size: %d\n",
-               node_2_p->edge_list_p->size);
-        // DEBUG END
     }
 
     free(edge_p);
     edge_p = NULL;
-
-    // DEBUG START
-    printf("Removed edge between '%s' and '%s'\n",
-           (char *)data_1_p,
-           (char *)data_2_p);
-    // DEBUG END
 
     exit_code = E_SUCCESS;
 END:
