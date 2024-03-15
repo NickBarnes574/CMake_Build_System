@@ -60,6 +60,8 @@ int main()
         goto END;
     }
 
+    graph_print(graph, printf);
+
     // Add edges
     printf("\nADDING EDGES...\n\n");
     exit_code =

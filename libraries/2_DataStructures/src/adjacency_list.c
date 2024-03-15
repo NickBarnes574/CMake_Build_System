@@ -429,6 +429,21 @@ END:
     return edge_p;
 }
 
+void graph_print(graph_t * graph_p, PRINT_F custom_print)
+{
+    // list_node_t * current_p = NULL;
+    if ((NULL == graph_p) || (NULL == custom_print))
+    {
+        print_error("graph_print(): NULL argument passed.");
+        goto END;
+    }
+
+    // NOLINTNEXTLINE
+    message_log("", COLOR_GREEN, "Graph has %zu nodes\n", graph_p->node_count);
+END:
+    return;
+}
+
 int graph_clear(graph_t * graph_p)
 {
     int           exit_code = E_FAILURE;

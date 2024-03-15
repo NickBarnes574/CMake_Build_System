@@ -19,6 +19,13 @@
 typedef void (*FREE_F)(void *);
 
 /**
+ * @brief A function pointer type for custom print operations on graph data.
+ *
+ * @param data_p A pointer to the data to print.
+ */
+typedef void (*PRINT_F)(const void *);
+
+/**
  * @brief Represents a node in the graph.
  *
  * A node contains user-defined data, a count of its outgoing/incoming edges,
@@ -151,6 +158,8 @@ node_t * graph_find_node(graph_t * graph_p, void * data_p);
 edge_t * graph_find_edge(graph_t * graph_p,
                          node_t *  node_1_p,
                          node_t *  node_2_p);
+
+void graph_print(graph_t * graph_p, PRINT_F custom_print);
 
 /**
  * @brief Clears the graph, removing all nodes and edges.
