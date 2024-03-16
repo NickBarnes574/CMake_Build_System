@@ -542,7 +542,9 @@ list_node_t * list_find_first_occurrence(list_t * list, void ** search_data)
 
     for (size_t idx = 0; idx < list->size; idx++)
     {
-        if (ERROR != (list->compare_func(search_data, current_node)))
+        if (EQUAL ==
+            (list->compare_func(*search_data,
+                                ((list_node_t *)(current_node->data))->data)))
         {
             goto END;
         }

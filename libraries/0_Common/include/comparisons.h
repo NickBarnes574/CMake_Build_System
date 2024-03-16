@@ -33,6 +33,16 @@ typedef comp_rtns_t (*CMP_F)(void *, void *);
  */
 comp_rtns_t int_comp(void * p_node_one_data, void * p_node_two_data);
 
+/**
+ * @brief Fuction to compare string data inside two void sources
+ *
+ * @param p_node_one_data pointer to the data from the first source
+ * @param p_node_two_data pointer to the data from the second source
+ * @return EQUAL (if equal), GREATER_THAN (if first argument is larger),
+ * LESS_THAN (if first_argument is less), ERROR (on error)
+ */
+comp_rtns_t str_comp(void * p_node_one_data, void * p_node_two_data);
+
 #endif /* _COMPARISONS_H */
 
 /*** end of file ***/

@@ -431,15 +431,26 @@ END:
 
 void graph_print(graph_t * graph_p, PRINT_F custom_print)
 {
-    // list_node_t * current_p = NULL;
+    list_node_t * current_p    = NULL;
+    node_t *      graph_node_p = NULL;
+
     if ((NULL == graph_p) || (NULL == custom_print))
     {
         print_error("graph_print(): NULL argument passed.");
         goto END;
     }
 
-    // NOLINTNEXTLINE
-    message_log("", COLOR_GREEN, "Graph has %zu nodes\n", graph_p->node_count);
+    current_p = graph_p->node_list_p->head;
+    while (NULL != current_p)
+    {
+        graph_node_p = (node_t *)(current_p->data);
+        printf("Node: ");
+        custom_print(graph_node_p->data_p);
+        printf(" with %zu edges.\n", graph_node_p->edge_count);
+
+        current_p = current_p->next;
+    }
+
 END:
     return;
 }
@@ -588,12 +599,7 @@ static void cleanup_node(graph_t * graph_p, node_t * node_p)
     node_p->edge_count = 0;
 
     free(node_p->edge_list_p);
-    // exit_code = list_delete(&node_p->edge_list_p);
-    // if (E_SUCCESS != exit_code)
-    // {
-    //     print_error("graph_remove_node(): Unable to delete node's edge
-    //     list.");
-    // }
+    node_p->edge_list_p = NULL;
 
     free(node_p);
     node_p = NULL;

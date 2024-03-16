@@ -6,6 +6,11 @@
 #include "comparisons.h"
 #include "utilities.h"
 
+void print_node_data(const void * data)
+{
+    printf("%s", (char *)data);
+}
+
 void node_free(void * data_p)
 {
     (void)data_p;
@@ -17,7 +22,7 @@ int main()
 {
     int exit_code = E_FAILURE;
 
-    graph_t * graph = graph_create(node_free, int_comp);
+    graph_t * graph = graph_create(node_free, str_comp);
     if (NULL == graph)
     {
         printf("NULL graph mofo!\n");
@@ -35,79 +40,77 @@ int main()
 
     // Add nodes
     printf("\nADDING NODES...\n\n");
-    exit_code = graph_add_node(graph, (void *)letters[0]);
+    exit_code = graph_add_node(graph, letters[0]);
     if (E_SUCCESS != exit_code)
     {
         print_error("Unable to add node.");
         goto END;
     }
-    exit_code = graph_add_node(graph, (void *)letters[1]);
+    exit_code = graph_add_node(graph, letters[1]);
     if (E_SUCCESS != exit_code)
     {
         print_error("Unable to add node.");
         goto END;
     }
-    exit_code = graph_add_node(graph, (void *)letters[2]);
+    exit_code = graph_add_node(graph, letters[2]);
     if (E_SUCCESS != exit_code)
     {
         print_error("Unable to add node.");
         goto END;
     }
-    exit_code = graph_add_node(graph, (void *)letters[3]);
+    exit_code = graph_add_node(graph, letters[3]);
     if (E_SUCCESS != exit_code)
     {
         print_error("Unable to add node.");
         goto END;
     }
 
-    graph_print(graph, printf);
+    graph_print(graph, print_node_data);
 
     // Add edges
     printf("\nADDING EDGES...\n\n");
-    exit_code =
-        graph_add_edge(graph, (void *)letters[0], (void *)letters[1], 1, false);
+    exit_code = graph_add_edge(graph, letters[0], letters[1], 1, true);
     if (E_SUCCESS != exit_code)
     {
         print_error("Unable to add edge.");
         goto END;
     }
-    exit_code =
-        graph_add_edge(graph, (void *)letters[1], (void *)letters[2], 1, false);
+    exit_code = graph_add_edge(graph, letters[1], letters[2], 1, true);
     if (E_SUCCESS != exit_code)
     {
         print_error("Unable to add edge.");
         goto END;
     }
-    exit_code =
-        graph_add_edge(graph, (void *)letters[2], (void *)letters[3], 1, false);
+    exit_code = graph_add_edge(graph, letters[2], letters[3], 1, true);
     if (E_SUCCESS != exit_code)
     {
         print_error("Unable to add edge.");
         goto END;
     }
 
+    graph_print(graph, print_node_data);
+
     printf("\nREMOVING EDGES...\n\n");
-    exit_code =
-        graph_remove_edge(graph, (void *)letters[0], (void *)letters[1]);
+    exit_code = graph_remove_edge(graph, letters[0], letters[1]);
     if (E_SUCCESS != exit_code)
     {
         print_error("Unable to remove edge.");
         goto END;
     }
-    exit_code =
-        graph_remove_edge(graph, (void *)letters[1], (void *)letters[2]);
+    exit_code = graph_remove_edge(graph, letters[1], letters[2]);
     if (E_SUCCESS != exit_code)
     {
         print_error("Unable to remove edge.");
         goto END;
     }
-    exit_code =
-        graph_remove_edge(graph, (void *)letters[2], (void *)letters[3]);
+    exit_code = graph_remove_edge(graph, letters[2], letters[3]);
     if (E_SUCCESS != exit_code)
     {
         print_error("Unable to remove edge.");
         goto END;
     }
+
+    graph_print(graph, print_node_data);
 
     printf("\nGETTING GRAPH SIZE...\n\n");
     graph_size = graph_get_size(graph);
