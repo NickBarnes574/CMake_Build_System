@@ -11,15 +11,15 @@
 #include "file_io.h"
 #include "utilities.h"
 
-#define MIN_FD 3               // The lowest allowable user-defined file descriptor
+#define MIN_FD    3 // The lowest allowable user-defined file descriptor
 #define MAX_BYTES (size_t)4096 // Max number of bytes to read or write at once
 
-int read_line(FILE *read_fd, char **line)
+int read_line(FILE * read_fd, char ** line)
 {
-    int exit_code = E_FAILURE;
+    int     exit_code           = E_FAILURE;
     ssize_t num_characters_read = 0;
-    size_t line_size;
-    char *line_buffer = NULL;
+    size_t  line_size;
+    char *  line_buffer = NULL;
 
     if (NULL == line)
     {
@@ -27,7 +27,7 @@ int read_line(FILE *read_fd, char **line)
         goto END;
     }
 
-    errno = 0;
+    errno               = 0;
     num_characters_read = getline(&line_buffer, &line_size, read_fd);
     if (-1 == num_characters_read)
     {
@@ -41,6 +41,7 @@ int read_line(FILE *read_fd, char **line)
         // EOF reached if no error was detected.
         free(line_buffer);
         line_buffer = NULL;
+        exit_code   = E_EOF;
         goto END;
     }
 
@@ -51,7 +52,7 @@ END:
     return exit_code;
 }
 
-int file_exists(const char *filepath)
+int file_exists(const char * filepath)
 {
     int exit_code = E_FAILURE;
 

@@ -13,6 +13,7 @@
 // Exit codes
 #define E_SUCCESS 0
 #define E_FAILURE -1
+#define E_EOF     -2
 
 // Color codes
 typedef enum
@@ -32,17 +33,17 @@ typedef enum
  * @param p_message The message to print
  * @return void - Returns nothing
  */
-void print_error(const char *p_message);
+void print_error(const char * p_message);
 
 /**
- * @brief Uses the underlying `strerror()` function to get a human-readable error
- * message corresponding to the `errno` value, and prints a custom error message
- * to `stderr` using `fprintf()`.
+ * @brief Uses the underlying `strerror()` function to get a human-readable
+ * error message corresponding to the `errno` value, and prints a custom error
+ * message to `stderr` using `fprintf()`.
  *
  * @param p_message The message to print
  * @return void - Returns nothing
  */
-void print_strerror(const char *p_message);
+void print_strerror(const char * p_message);
 
 /**
  * @brief Logs a formatted message with a timestamp, prefix, and colored output.
@@ -62,9 +63,9 @@ void print_strerror(const char *p_message);
  * @return int Returns E_SUCCESS on successful logging, or E_FAILURE if an error
  * occurs.
  */
-int message_log(const char *prefix_p,
+int message_log(const char * prefix_p,
                 color_code_t color,
-                const char *format,
+                const char * format,
                 ...);
 
 #endif /* _UTILITIES_H */
