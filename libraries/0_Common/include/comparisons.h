@@ -43,6 +43,8 @@ comp_rtns_t int_comp(void * p_node_one_data, void * p_node_two_data);
  */
 comp_rtns_t str_comp(void * p_node_one_data, void * p_node_two_data);
 
+comp_rtns_t cell_comp(void * p_node_one_data, void * p_node_two_data);
+
 #endif /* _COMPARISONS_H */
 
 /*** end of file ***/

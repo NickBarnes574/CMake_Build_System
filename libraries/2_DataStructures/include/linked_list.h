@@ -3,6 +3,7 @@
 
 #include <errno.h>
 #include <stdarg.h>
+#include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -120,7 +121,7 @@ int list_emptycheck(list_t * list);
  * @param list list to pop the node out of
  * @return pointer to popped node on success, NULL on failure
  */
-list_node_t * list_pop_head(list_t * list);
+void * list_pop_head(list_t * list);
 
 /**
  * @brief pops the tail node out of the list
@@ -128,7 +129,7 @@ list_node_t * list_pop_head(list_t * list);
  * @param list list to pop the node out of
  * @return pointer to popped node on success, NULL on failure
  */
-list_node_t * list_pop_tail(list_t * list);
+void * list_pop_tail(list_t * list);
 
 /**
  * @brief pops a node out of list at a specific position
@@ -137,7 +138,7 @@ list_node_t * list_pop_tail(list_t * list);
  * @param position position of the node
  * @return pointer to popped node on success, NULL on failure
  */
-list_node_t * list_pop_position(list_t * list, uint32_t position);
+void * list_pop_position(list_t * list, uint32_t position);
 
 /**
  * @brief removes a node from the head of a list
@@ -171,7 +172,7 @@ int list_remove_position(list_t * list, uint32_t position);
  * @param list list to pop the node out of
  * @return pointer to head node on success, NULL on failure
  */
-list_node_t * list_peek_head(list_t * list);
+void * list_peek_head(list_t * list);
 
 /**
  * @brief get the data from the node at the tail of the list without
@@ -180,7 +181,7 @@ list_node_t * list_peek_head(list_t * list);
  * @param list list to pop the node out of
  * @return pointer to tail node on success, NULL on failure
  */
-list_node_t * list_peek_tail(list_t * list);
+void * list_peek_tail(list_t * list);
 
 /**
  * @brief get the data from the node at a specific position of the list without
@@ -190,7 +191,7 @@ list_node_t * list_peek_tail(list_t * list);
  * @param position position of the node
  * @return pointer to tail node on success, NULL on failure
  */
-list_node_t * list_peek_position(list_t * list, uint32_t position);
+void * list_peek_position(list_t * list, uint32_t position);
 
 /**
  * @brief remove a specific node from the list based on the data stored
@@ -212,16 +213,19 @@ int list_remove_data(list_t * list, void * data_p);
  */
 int list_foreach_call(list_t * list, ACT_F action_function);
 
+bool   list_contains(list_t * list, void * data_p);
+void * list_pick_random_item(list_t * list);
+
 /**
  * @brief find the first occurrance of a node containing the search_data as
  *        found by the user defined compare function
  *
  * @param list list to search through
- * @param search_data is the pointer to the address of the data to be searched
- *                    for
+ * @param search_data is the pointer to the address of the data to be
+ * searched for
  * @return pointer to node found on success, NULL on failure
  */
-list_node_t * list_find_first_occurrence(list_t * list, void ** search_data);
+void * list_find_first_occurrence(list_t * list, void ** search_data);
 
 /**
  * @brief find the first occurrance of a node containing the search_data as

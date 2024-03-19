@@ -8,7 +8,7 @@ function(add_all_libraries)
 
     # Link libraries
     target_link_libraries(Math PUBLIC Common)
-    target_link_libraries(DSA PUBLIC Common)
+    target_link_libraries(DSA PUBLIC Common Math)
     target_link_libraries(Threading PUBLIC Common DSA pthread)
     target_link_libraries(Networking PUBLIC Common Threading)
 endfunction()

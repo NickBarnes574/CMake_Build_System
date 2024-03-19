@@ -1,5 +1,6 @@
 #include "linked_list.h"
 #include "comparisons.h"
+#include "number_generator.h"
 #include "utilities.h"
 
 /**
@@ -243,7 +244,7 @@ END:
     return exit_code;
 }
 
-list_node_t * list_pop_head(list_t * list)
+void * list_pop_head(list_t * list)
 {
     list_node_t * head_node = NULL;
 
@@ -269,10 +270,10 @@ list_node_t * list_pop_head(list_t * list)
     list->size--;
 
 END:
-    return head_node;
+    return head_node->data;
 }
 
-list_node_t * list_pop_tail(list_t * list)
+void * list_pop_tail(list_t * list)
 {
     list_node_t * tail_node = NULL;
 
@@ -298,10 +299,10 @@ list_node_t * list_pop_tail(list_t * list)
     list->size--;
 
 END:
-    return tail_node;
+    return tail_node->data;
 }
 
-list_node_t * list_pop_position(list_t * list, uint32_t position)
+void * list_pop_position(list_t * list, uint32_t position)
 {
     list_node_t * current     = NULL;
     list_node_t * node_to_pop = NULL;
@@ -349,7 +350,7 @@ list_node_t * list_pop_position(list_t * list, uint32_t position)
     list->size--;
 
 END:
-    return node_to_pop;
+    return node_to_pop->data;
 }
 
 int list_remove_head(list_t * list)
@@ -424,7 +425,7 @@ END:
     return exit_code;
 }
 
-list_node_t * list_peek_head(list_t * list)
+void * list_peek_head(list_t * list)
 {
     list_node_t * node = NULL;
 
@@ -437,10 +438,10 @@ list_node_t * list_peek_head(list_t * list)
     node = list->head;
 
 END:
-    return node;
+    return node->data;
 }
 
-list_node_t * list_peek_tail(list_t * list)
+void * list_peek_tail(list_t * list)
 {
     list_node_t * node = NULL;
 
@@ -453,10 +454,10 @@ list_node_t * list_peek_tail(list_t * list)
     node = list->tail;
 
 END:
-    return node;
+    return node->data;
 }
 
-list_node_t * list_peek_position(list_t * list, uint32_t position)
+void * list_peek_position(list_t * list, uint32_t position)
 {
     list_node_t * current_node = NULL;
 
@@ -479,7 +480,7 @@ list_node_t * list_peek_position(list_t * list, uint32_t position)
     }
 
 END:
-    return current_node;
+    return current_node->data;
 }
 
 int list_remove_data(list_t * list, void * data_p)
@@ -528,7 +529,7 @@ END:
     return exit_code;
 }
 
-list_node_t * list_find_first_occurrence(list_t * list, void ** search_data)
+void * list_find_first_occurrence(list_t * list, void ** search_data)
 {
     list_node_t * current_node = NULL;
 
@@ -554,7 +555,77 @@ list_node_t * list_find_first_occurrence(list_t * list, void ** search_data)
 
     current_node = NULL; // Set back to NULL if no match was found
 END:
-    return current_node;
+    return current_node->data;
+}
+
+bool list_contains(list_t * list, void * data_p)
+{
+    bool          result    = false;
+    list_node_t * current_p = NULL;
+
+    if ((NULL == list) || (NULL == data_p))
+    {
+        print_error("list_contains(): NULL argument passed.");
+        goto END;
+    }
+
+    current_p = list->head;
+
+    while (NULL != current_p)
+    {
+        if (EQUAL == list->compare_func(current_p->data, data_p))
+        {
+            result = true;
+            goto END;
+        }
+        current_p = current_p->next;
+    }
+
+END:
+    return result;
+}
+
+void * list_pick_random_item(list_t * list)
+{
+    int           exit_code    = E_FAILURE;
+    list_node_t * node_p       = NULL;
+    int           random_index = 0;
+
+    if (NULL == list)
+    {
+        print_error("list_pick_random_item(): NULL argument passed.");
+        goto END;
+    }
+
+    if (0 == list->size)
+    {
+        print_error("list_pick_random_item(): List is empty.");
+        goto END;
+    }
+
+    exit_code = random_number(0, list->size - 1, &random_index);
+    if (E_SUCCESS != exit_code)
+    {
+        print_error(
+            "list_pick_random_item(): Unable to generate a random index.");
+        goto END;
+    }
+
+    node_p = list->head;
+    for (int idx = 0; (idx < random_index) && (NULL != node_p); ++idx)
+    {
+        node_p = node_p->next;
+    }
+
+    if (NULL == node_p)
+    {
+        print_error(
+            "list_pick_random_item(): Failed to navigate random index.");
+        goto END;
+    }
+
+END:
+    return node_p->data;
 }
 
 list_t * list_find_all_occurrences(list_t * list, void ** search_data)

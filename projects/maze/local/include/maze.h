@@ -6,8 +6,10 @@
 #ifndef _MAZE_H
 #define _MAZE_H
 
-#define MAX_ROWS 100
-#define MAX_COLS 100
+#define MAX_ROWS   100
+#define MAX_COLS   100
+#define MAZE_START '@'
+#define MAZE_END   '>'
 
 typedef struct cell_t cell_t;
 typedef struct maze_t maze_t;

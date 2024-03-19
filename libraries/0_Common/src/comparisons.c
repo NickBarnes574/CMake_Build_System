@@ -5,6 +5,12 @@
 #include "comparisons.h"
 #include "utilities.h"
 
+typedef struct
+{
+    int row;
+    int col;
+} cell_t;
+
 comp_rtns_t int_comp(void * p_node_one_data, void * p_node_two_data)
 {
     comp_rtns_t result   = ERROR;
@@ -77,6 +83,56 @@ comp_rtns_t str_comp(void * p_node_one_data, void * p_node_two_data)
     {
         result = GREATER_THAN;
         goto END;
+    }
+
+END:
+    return result;
+}
+
+comp_rtns_t cell_comp(void * p_node_one_data, void * p_node_two_data)
+{
+    comp_rtns_t result   = ERROR;
+    cell_t *    cell_one = NULL;
+    cell_t *    cell_two = NULL;
+
+    if ((NULL == p_node_one_data) || (NULL == p_node_two_data))
+    {
+        print_error("NULL argument passed.");
+        goto END;
+    }
+
+    cell_one = (cell_t *)p_node_one_data;
+    cell_two = (cell_t *)p_node_two_data;
+
+    // First compare by row
+    if (cell_one->row < cell_two->row)
+    {
+        result = LESS_THAN;
+        goto END;
+    }
+    else if (cell_one->row > cell_two->row)
+    {
+        result = GREATER_THAN;
+        goto END;
+    }
+    else
+    {
+        // If rows are equal, compare by column
+        if (cell_one->col < cell_two->col)
+        {
+            result = LESS_THAN;
+            goto END;
+        }
+        else if (cell_one->col > cell_two->col)
+        {
+            result = GREATER_THAN;
+            goto END;
+        }
+        else
+        {
+            result = EQUAL;
+            goto END;
+        }
     }
 
 END:
