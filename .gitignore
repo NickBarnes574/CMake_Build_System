@@ -2,7 +2,6 @@
 /deploy/
 /release/
 /debug/
-/docs/
 CMakeFiles/
 
 /.vscode

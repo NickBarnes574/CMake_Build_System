@@ -4,6 +4,7 @@
 # configurations.
 #
 # Targets:
+#   all:		Builds the project for all architectures.
 #   default:    Builds the project in the release configuration for x86_64.
 #   release:    Builds and installs the project in release mode for x86_64.
 #   debug:      Builds and installs the project in debug mode for x86_64.
@@ -17,28 +18,42 @@
 
 MAKEFLAGS += --no-print-directory # Suppress 'Entering directory' messages.
 
+# Project configuration
+BUILD_DIR = build/artifacts
+
+# Toolchains
+AARCH64_TOOLCHAIN = cmake/toolchains/aarch64-glibc-toolchain.cmake
+
 default: release
 
-all: release debug aarch64
+all: 
+	@$(MAKE) release
+	@$(MAKE) debug
+	@$(MAKE) aarch64
 
-release:
-	@cmake -S . -B build/artifacts/x86_64 -DCMAKE_BUILD_TYPE=Release
-	@cmake --build build/artifacts/x86_64 --target install
-	@rm -rf build/artifacts
+# x86_64
+release: BUILD_TYPE = Release
+release: ARCH = x86_64
+release: build
 
-debug:
-	@cmake -S . -B build/artifacts/x86_64 -DCMAKE_BUILD_TYPE=Debug
-	@cmake --build build/artifacts/x86_64 --target install
-	@rm -rf build/artifacts
+debug: BUILD_TYPE = Debug
+debug: ARCH = x86_64
+debug: build
 
-aarch64:
-	@cmake -S . -B build/artifacts/aarch64 -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=cmake/toolchains/aarch64-glibc-toolchain.cmake
-	@cmake --build build/artifacts/aarch64 --target install
-	@rm -rf build/artifacts
+# aarch64
+aarch64: BUILD_TYPE = Release
+aarch64: ARCH = aarch64
+aarch64: TOOLCHAIN = -DCMAKE_TOOLCHAIN_FILE=$(AARCH64_TOOLCHAIN)
+aarch64: build
+
+build:
+	@cmake -S . -B $(BUILD_DIR)/$(ARCH) -DCMAKE_BUILD_TYPE=$(BUILD_TYPE) $(TOOLCHAIN)
+	@cmake --build $(BUILD_DIR)/$(ARCH) --target install
+	@rm -rf $(BUILD_DIR)
 
 clean:
 	@rm -rf build .vscode
 
-.PHONY: release debug clean aarch64 all
+.PHONY: release debug clean aarch64 all build
 
 # *** end of file ***
