@@ -47,6 +47,29 @@ matrix_t * matrix_init(size_t num_nodes,
 void matrix_destroy(matrix_t ** graph_address);
 
 /**
+ * @brief Populates a pre-allocated node in the graph with data and a label.
+ *
+ * @param graph Pointer to the graph.
+ * @param index The index of the node to populate.
+ * @param data Pointer to the data to assign to the node.
+ * @param label The label to assign to the node.
+ * @return Status code indicating success or failure.
+ */
+int matrix_populate_node(matrix_t *   graph,
+                         size_t       index,
+                         const void * data,
+                         const char * label);
+
+/**
+ * @brief Depopulates a node in the graph by freeing the data and the label.
+ *
+ * @param graph Pointer to the graph.
+ * @param index The index of the node to depopulate.
+ * @return Status code indicating success or failure.
+ */
+int matrix_depopulate_node(matrix_t * graph, size_t index);
+
+/**
  * @brief Adds a new node to the graph.
  *
  * @param graph Pointer to the graph.

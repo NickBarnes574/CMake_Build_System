@@ -1,4 +1,5 @@
 #include <ctype.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -60,6 +61,57 @@ int strings_are_equal(const char * str1_p, const char * str2_p, int * result_p)
     }
 
     *result_p = result;
+
+    exit_code = E_SUCCESS;
+END:
+    return exit_code;
+}
+
+int copy_string(const char * input,
+                char **      output,
+                size_t       character_limit,
+                bool         allow_truncation)
+{
+    int    exit_code      = E_FAILURE;
+    int    num_characters = 0;
+    size_t buffer_size    = 0;
+    char * buffer         = NULL;
+
+    if ((NULL == input) || (NULL == output))
+    {
+        print_error("copy_string(): NULL argument passed.");
+        goto END;
+    }
+
+    buffer_size = character_limit + 1; // +1 for NULL terminator
+
+    buffer = calloc(buffer_size, sizeof(char));
+    if (NULL == buffer)
+    {
+        print_error("copy_string(): buffer - CMR failure.");
+        goto END;
+    }
+
+    num_characters = snprintf(buffer, buffer_size, "%s", input);
+    if (0 > num_characters)
+    {
+        print_error("copy_string(): snprintf() failure.");
+        free(buffer);
+        buffer = NULL;
+        goto END;
+    }
+    if (num_characters >= buffer_size)
+    {
+        if (false == allow_truncation)
+        {
+            print_error("copy_string(): String truncation detected.");
+            free(buffer);
+            buffer = NULL;
+            goto END;
+        }
+    }
+
+    *output = buffer;
 
     exit_code = E_SUCCESS;
 END:
